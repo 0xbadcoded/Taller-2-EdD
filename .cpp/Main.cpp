@@ -12,16 +12,33 @@ void leerArchivo() {
 
     while(getline(arch, linea)){
         stringstream ss(linea);
-        string id, nombre, stringEdad, servicio;
+        string id, nombre, stringEdad, stringTemperatura, stringPresionArterial, 
+        stringDolor, tipoDolor, stringTrauma, stringSintomasNeurologicos, stringRequiereCirugia,
+        stringDiasHospitalizacion;
         
         getline(ss, id, ';');
         getline(ss, nombre, ';');
         getline(ss, stringEdad, ';');
-        getline(ss, servicio, ';');
+        getline(ss, stringTemperatura, ';');
+        getline(ss, stringPresionArterial, ';');
+        getline(ss, stringDolor, ';');
+        getline(ss, tipoDolor, ';');
+        getline(ss, stringTrauma, ';');
+        getline(ss, stringSintomasNeurologicos, ';');
+        getline(ss, stringRequiereCirugia, ';');
+        getline(ss, stringDiasHospitalizacion, ';');
 
-        int edad = stoi(stringEdad);
-        if(!sistema->verificarSiExisteServicio(servicio)) {sistema->crearServicio(servicio);}   
-        sistema->crearPaciente(id, nombre, edad, servicio);
+        int edad = stoi(stringEdad);  
+        double temperatura = stod(stringTemperatura);
+        int presionArterial = stoi(stringPresionArterial);
+        int dolor = stoi(stringDolor);
+        bool trauma = stoi(stringTrauma) != 0;
+        bool sintomasNeurologicos = stoi(stringSintomasNeurologicos) != 0;
+        bool requiereCirugia = stoi(stringRequiereCirugia) != 0;
+        int diasHospitalizacion = stoi(stringDiasHospitalizacion);
+        
+        sistema->crearPaciente(id, nombre, edad, temperatura, presionArterial,
+        dolor, tipoDolor, trauma, sintomasNeurologicos, requiereCirugia, diasHospitalizacion);
     }
 }
 
@@ -31,14 +48,6 @@ void mostrarPacientes() {
 
 void mostrarServicios() {
     cout << sistema->recorrerHospital() << endl;
-}
-
-void mostrarUltimoAtendido() {
-    Paciente* paciente = sistema->getUltimoAtendido();
-
-    cout << "Nombre: " << paciente->getNombre() << " | " <<
-     "Edad: " << paciente->getEdad() << " | " << "Departamento: " << 
-     paciente->getServicio() << endl;
 }
 
 int main() {
@@ -51,7 +60,6 @@ int main() {
         cout << "=== HOSPITAL MARMAJA ===" << endl;
         cout << "1. Atender pacientes" << endl;
         cout << "2. Ver departamento" << endl;
-        cout << "3. Revisar historial de atención" << endl;
         cout << "4. Salir" << endl;
         cout << endl;
         cin>>opcion;
@@ -80,9 +88,6 @@ int main() {
 
                 break;
             case 3:
-                cout << "HISTORIAL DE ÚLTIMA ATENCIÓN DEL HOSPITAL" << endl;
-                mostrarUltimoAtendido();
-                break;
             case 4:
                 break;
         }

@@ -7,17 +7,18 @@ using namespace std;
 
 class Sistema {
     private:
-        Hospital* hospital = new Hospital("Marmaja");
         ListaPacientes* lista = new ListaPacientes();
-        Paciente* ultimoAtendido;
+        Hospital* hospital = new Hospital("Hospital");
+        Paciente* ultimoAtendido = nullptr;
 
     public:
-        void crearPaciente(string id, string nombre, int edad, string servicio);
+        void crearPaciente(string id, string nombre, int edad, double temperatura,
+        int presionArterial, int dolor, string tipoDolor, bool trauma, bool sintomasNeurologicos,
+        bool requiereCirugia, int diasHospitalizacion);
         void crearServicio(string nombre);
         string recorrerListaPacientes();
         string recorrerHospital();
-        bool verificarSiExisteServicio(string nombre);
         void repletarServicios(int cantidad);
         void mostrarServicios(int posicion);
-        Paciente* getUltimoAtendido() {return ultimoAtendido;}
+
 };
