@@ -12,33 +12,25 @@ g++ -I.h .cpp/ArbolAVL.cpp .cpp/ArbolDecision.cpp .cpp/Main.cpp .cpp/Sistema.cpp
 ./taller2
 
 ## Jerarquía del árbol de decisiones.
-¿Dolor >= 8 || Temperatura >= 38.5?
-|-- Si: Urgencia
-|
-|-- No:
-    ¿Edad >= 18 años?
-    |-- No: Pediatria
-    |
-    |-- Si:
-        ¿Trauma == 1 || requiereCirugia == 1?
-        |-- Si:
-            ¿requiereCirugia == 1?
-            |-- Si: Cirugia
-            |-- No: Traumatologia
-        |
-        |
-        |-- No:
-            ¿sintomasNeurologicos == 1?
-            |-- Si: Neurologia
-            |
-            |-- No:
-                ¿tipoDolor == "pecho"?
-                |-- Si: Cardiología
-                |
-                |-- No:
-                    ¿diasHospitalizacion >= 2?
-                    |-- Si: Hospitalizacion
-                    |-- No: Medicina general
---
-Se eligió este orden debido al planteamiento de "prioridades" a la hora de
-evaluar inicialmente que tan en riesgo se encuentra el paciente, para posteriormente realizar una evaluación completa del estado en el que llegó.
+El árbol evalúa primero los criterios de urgencia. Si el paciente no cumple ese criterio, continúa con la edad y las demás características:
+
+```mermaid
+flowchart TD
+    A{"¿Dolor ≥ 8 o temperatura ≥ 38.5?"}
+    A -- Sí --> U[Urgencias]
+    A -- No --> B{"¿Edad ≥ 18 años?"}
+    B -- No --> P[Pediatría]
+    B -- Sí --> C{"¿Trauma = 1 o requiere cirugía = 1?"}
+    C -- Sí --> D{"¿Requiere cirugía = 1?"}
+    D -- Sí --> CI[Cirugía]
+    D -- No --> T[Traumatología]
+    C -- No --> E{"¿Tiene síntomas neurológicos?"}
+    E -- Sí --> N[Neurología]
+    E -- No --> F{"¿El tipo de dolor es pecho?"}
+    F -- Sí --> CA[Cardiología]
+    F -- No --> G{"¿Días de hospitalización ≥ 2?"}
+    G -- Sí --> H[Hospitalización]
+    G -- No --> M[Medicina general]
+```
+
+Se eligió este orden para evaluar primero los criterios de urgencia y luego derivar al paciente según su edad y características. Por eso, si cumple el criterio de urgencia, se asigna a Urgencias antes de evaluar las demás preguntas.
