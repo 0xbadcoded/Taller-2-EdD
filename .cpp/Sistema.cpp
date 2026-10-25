@@ -70,26 +70,19 @@ string Sistema::recorrerHospital() {
     return texto;
 }
 
-void Sistema::mostrarServicios(int posicion) {
-    if(hospital->getFront() == nullptr) {return;}
-    
+void Sistema::mostrarServicios() {
     Servicio* actual = hospital->getFront();
-    for(int i = 1; i < posicion; i++) {
+
+    while (actual != nullptr) {
+        cout << "\n=== " << actual->getNombre() << " ===" << endl;
+
+        if (actual->getArbolAVL().isEmpty()) {
+            cout << "Sin pacientes." << endl;
+        } else {
+            actual->getArbolAVL().imprimirEnOrden();
+        }
+
         actual = actual->getSiguiente();
-    }
-
-    ListaPacientes& listaP = actual->getListaPacientes();
-
-    cout << "=== ESTADO " << actual->getNombre() + " ===" << endl;
-    cout << "Pacientes en el departamento de " << actual->getNombre() + ":" << listaP.size() << endl;
-
-    NodoPaciente* nodoActual = listaP.getFront();
-
-    while(nodoActual != nullptr) {
-        Paciente* pacienteActual = nodoActual->getPaciente();
-
-        cout << pacienteActual->getNombre() + "(" << pacienteActual->getEdad() << ")" << endl;
-        nodoActual = nodoActual->getSiguiente();
     }
 }
 
@@ -103,8 +96,9 @@ void Sistema::atenderPaciente() {
     if (servicio == nullptr) {cout << "No se pudo clasificar al paciente." << endl; return;}
 
     lista->pop();
-    servicio->getListaPacientes().push(new NodoPaciente(paciente));
+    servicio->getArbolAVL().insertar(paciente);
     
+
     cout << paciente->toString() << endl;
     cout << "Ruta: " << ruta << endl;
     cout << endl;

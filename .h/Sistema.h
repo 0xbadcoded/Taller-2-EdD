@@ -19,6 +19,6 @@ class Sistema {
         string recorrerListaPacientes();
         string recorrerHospital();
         void atenderPaciente();
-        void mostrarServicios(int posicion);
+        void mostrarServicios();
 
 };

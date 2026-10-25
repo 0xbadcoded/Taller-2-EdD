@@ -73,16 +73,11 @@ int main() {
 
                 break;
             case 2:
-                mostrarServicios();
-
-                cout << "Seleccionar opción: " << endl;
-                int opc;
-
-                cin>>opc;
-                sistema->mostrarServicios(opc);
+                sistema->mostrarServicios();    
 
                 break;
             case 3:
+                break;
             case 4:
                 break;
         }

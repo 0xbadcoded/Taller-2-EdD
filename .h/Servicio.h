@@ -1,13 +1,13 @@
 #pragma once
 #include <iostream>
-#include "ListaPacientes.h"
+#include "ArbolAVL.h"
 using namespace std;
 
 class Servicio {
     private:
         string nombre;
         Servicio* siguiente;
-        ListaPacientes lista;
+        ArbolAVL arbol;
 
     public: 
         Servicio(string nombre) {
@@ -17,5 +17,5 @@ class Servicio {
         string getNombre() {return nombre;}
         Servicio* getSiguiente() {return siguiente;}
         void setSiguiente(Servicio* nuevo) {this->siguiente = nuevo;}
-        ListaPacientes& getListaPacientes() {return lista;}
+        ArbolAVL& getArbolAVL() {return arbol;}
 };
