@@ -22,25 +22,6 @@ bool requiereCirugia, int diasHospitalizacion) {
     return;
 }
 
-void Sistema::crearServicio(string nombre) {
-    Servicio* servicio = new Servicio(nombre);
-
-    if(hospital->getPrimero() == nullptr) {
-        hospital->setPrimero(servicio);
-        return;
-    }
-
-    Servicio* actual = hospital->getPrimero();
-
-    while(actual->getSiguiente() != nullptr) {
-        actual = actual->getSiguiente();
-    }
-
-    actual->setSiguiente(servicio);
-
-    return;
-}
-
 string Sistema::recorrerListaPacientes() {
     cout << endl;
     string texto;
@@ -71,14 +52,14 @@ string Sistema::recorrerHospital() {
     string texto = "";
 
     
-    if(hospital->getPrimero() == nullptr) {
+    if(hospital->getFront() == nullptr) {
         texto += "No hay servicios.";
         return texto;
     }
     
     int contador = 1;
     
-    Servicio* actual = hospital->getPrimero();
+    Servicio* actual = hospital->getFront();
 
     while(actual != nullptr) {
         texto += to_string(contador) + ". " + actual->getNombre() + "\n";
@@ -89,12 +70,10 @@ string Sistema::recorrerHospital() {
     return texto;
 }
 
-void Sistema::repletarServicios(int cantidad) {}
-
 void Sistema::mostrarServicios(int posicion) {
-    if(hospital->getPrimero() == nullptr) {return;}
+    if(hospital->getFront() == nullptr) {return;}
     
-    Servicio* actual = hospital->getPrimero();
+    Servicio* actual = hospital->getFront();
     for(int i = 1; i < posicion; i++) {
         actual = actual->getSiguiente();
     }
@@ -112,4 +91,23 @@ void Sistema::mostrarServicios(int posicion) {
         cout << pacienteActual->getNombre() + "(" << pacienteActual->getEdad() << ")" << endl;
         nodoActual = nodoActual->getSiguiente();
     }
+}
+
+void Sistema::atenderPaciente() {
+    if(lista->isEmpty()) {cout << "No hay pacientes en espera" << endl; return;}
+
+    Paciente* paciente = lista->getFront()->getPaciente();
+    string ruta;
+    Servicio* servicio = arbolDecision->clasificar(paciente, ruta);
+
+    if (servicio == nullptr) {cout << "No se pudo clasificar al paciente." << endl; return;}
+
+    lista->pop();
+    servicio->getListaPacientes().push(new NodoPaciente(paciente));
+    
+    cout << paciente->toString() << endl;
+    cout << "Ruta: " << ruta << endl;
+    cout << endl;
+    cout << "Servicio asignado: " << servicio->getNombre() << endl;
+    cout << endl;
 }

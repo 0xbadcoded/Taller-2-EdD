@@ -13,7 +13,7 @@ class NodoPaciente {
             this->paciente = paciente;
             this->siguiente = nullptr;
         }
-        ~NodoPaciente();
+        ~NodoPaciente() = default;
         Paciente* getPaciente() {return paciente;}
         NodoPaciente* getSiguiente() {return siguiente;}
         void setSiguiente(NodoPaciente* nuevo) {this->siguiente = nuevo;}

@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 using namespace std;
 
@@ -43,4 +44,22 @@ class Paciente {
         bool getSintomasNeurologicos() {return sintomasNeurologicos;}
         bool getRequiereCirugia() {return requiereCirugia;}
         int getDiasHospitalizado() {return diasHospitalizacion;}
+
+        string toString() {
+            string resultado = "";
+
+            resultado += "ID: " + id + "\n";
+            resultado += "Nombre: " + nombre + "\n";
+            resultado += "Edad: " + to_string(edad) + "\n";
+            resultado += "Temperatura: " + to_string(temperatura) + "\n";
+            resultado += "Presion arterial: " + to_string(presionArterial) + "\n";
+            resultado += "Dolor: " + to_string(dolor) + "\n";
+            resultado += "Tipo de dolor: " + tipoDolor + "\n";
+            resultado += "Trauma: " + string(trauma ? "Si" : "No") + "\n";
+            resultado += "Sintomas neurologicos: " + string(sintomasNeurologicos ? "Si" : "No") + "\n";
+            resultado += "Requiere cirugia: " + string(requiereCirugia ? "Si" : "No") + "\n";
+            resultado += "Dias de hospitalizacion: " + to_string(diasHospitalizacion) + "\n";
+
+            return resultado;
+        }
 };

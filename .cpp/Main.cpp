@@ -57,24 +57,19 @@ int main() {
     int opcion;
 
     do {
-        cout << "=== HOSPITAL MARMAJA ===" << endl;
+        cout << "=== HOSPITAL LOS UCENINES ===" << endl;
         cout << "1. Atender pacientes" << endl;
         cout << "2. Ver departamento" << endl;
+        cout << "3. Buscar paciente" << endl;
         cout << "4. Salir" << endl;
         cout << endl;
         cin>>opcion;
 
         switch(opcion) {
             case 1:
-                cout << "=== PACIENTES EN ESPERA ===" << endl;
-                mostrarPacientes();
-
-                cout << "Indique la cantidad de pacientes a atender: " << endl;
-
-                int cantidad;
-                cin>>cantidad;
-
-                sistema->repletarServicios(cantidad);
+                cout << "=== ATENDIENDO PACIENTES ===" << endl;
+                
+                sistema->atenderPaciente();
 
                 break;
             case 2:

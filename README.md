@@ -7,7 +7,7 @@
 - Paralelo: C2
 
 ## Compilar
-g++ -I.h .cpp/Main.cpp .cpp/Sistema.cpp -o taller2
+g++ -I.h .cpp/ArbolDecision.cpp .cpp/Main.cpp .cpp/Sistema.cpp -o taller2
 
 ./taller2
 

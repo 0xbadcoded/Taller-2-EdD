@@ -6,14 +6,38 @@ using namespace std;
 class Hospital {
     private:
         string nombre;
-        Servicio* primero;
-        
+        Servicio* front;
+         
     public:
-        Hospital(string nombre) {
-            this->nombre = nombre; 
-            this->primero = nullptr;
+        Hospital() {
+            this-> nombre = "Los Ucenines";
+            this->front = nullptr;
+            introducirServicios();
         }
-        string getNombre() {return nombre;}
-        Servicio* getPrimero() {return primero;}
-        void setPrimero(Servicio* servicio) {this->primero = servicio;}
+        void introducirServicios() {
+            push(new Servicio("Urgencias"));
+            push(new Servicio("Medicina general"));
+            push(new Servicio("Cardiologia"));
+            push(new Servicio("Neurologia"));
+            push(new Servicio("Traumatologia"));
+            push(new Servicio("Cirugia"));
+            push(new Servicio("Pediatria"));
+            push(new Servicio("Hospitalizacion"));
+        }
+
+        void push(Servicio* servicio) {
+            if (isEmpty()) {front = servicio; return;}
+
+            Servicio* actual = front;
+
+            while(actual->getSiguiente() != nullptr) {
+                actual = actual->getSiguiente();
+            }
+
+            actual->setSiguiente(servicio);
+            return;
+        }
+
+        Servicio* getFront() {return front;}
+        bool isEmpty() {return front == nullptr;}
 };

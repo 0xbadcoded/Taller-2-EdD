@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include "ListaPacientes.h"
 using namespace std;
