@@ -43,14 +43,18 @@ class ListaPacientes {
             return;
         }
 
-        void pop() {
-            if (isEmpty()) {return;}
+        Paciente* pop() {
+            if (isEmpty()) {return nullptr;}
 
-            NodoPaciente* actual = primero->getSiguiente();
-            delete primero;
-            primero = actual;
-            return;
-        };
+            NodoPaciente* temp = primero;
+            Paciente* paciente = temp->getPaciente();
+
+            primero = primero->getSiguiente();
+            temp->setSiguiente(nullptr);
+            delete temp;
+            
+            return paciente;
+        }
 
         NodoPaciente* front() {return primero;}
         bool isEmpty() {return primero == nullptr;}
